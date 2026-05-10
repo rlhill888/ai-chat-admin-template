@@ -1,0 +1,68 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.enter {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.exit {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.spinner {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--brand-color);
+  animation: pulse 1.2s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.text {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: #111111;
+  opacity: 0.55;
+}
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0.7);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

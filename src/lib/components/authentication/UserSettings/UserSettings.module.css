@@ -1,0 +1,119 @@
+#wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444444;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  color: #111111;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input::placeholder {
+  color: #bbbbbb;
+}
+
+.input:focus {
+  border-color: #111111;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.input:disabled {
+  background: #f0f0f0;
+  color: #aaaaaa;
+  border-color: rgba(0, 0, 0, 0.07);
+  cursor: not-allowed;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444444;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #111111;
+}
+
+.button {
+  margin-top: 6px;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1.5px solid #111111;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: #333333;
+  border-color: #333333;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  background: #e0e0e0;
+  border-color: #e0e0e0;
+  color: #aaaaaa;
+  cursor: not-allowed;
+  transform: none;
+}

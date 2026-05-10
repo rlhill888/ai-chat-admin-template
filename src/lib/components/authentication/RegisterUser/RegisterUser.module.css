@@ -1,0 +1,163 @@
+#wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #888888;
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444444;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.input,
+.select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  color: #111111;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input::placeholder {
+  color: #bbbbbb;
+}
+
+.input:focus,
+.select:focus {
+  border-color: #111111;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.button {
+  margin-top: 10px;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1.5px solid #111111;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background: #333333;
+  border-color: #333333;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.copyBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  background: #f5f5f5;
+}
+
+.link {
+  font-size: 13px;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copyButton {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #111111;
+  background: #111111;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  flex-shrink: 0;
+}
+
+.copyButton:hover {
+  background: #333333;
+  border-color: #333333;
+}
+
+.copyButton:active {
+  transform: scale(0.97);
+}
+
+.input:disabled,
+.select:disabled {
+  background: #f0f0f0;
+  color: #aaaaaa;
+  border-color: rgba(0, 0, 0, 0.07);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.input:disabled::placeholder {
+  color: #cccccc;
+}
+
+.button:disabled {
+  background: #e0e0e0;
+  border-color: #e0e0e0;
+  color: #aaaaaa;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.button:disabled:hover {
+  background: #e0e0e0;
+  border-color: #e0e0e0;
+  color: #aaaaaa;
+}
+
+.button:disabled:active {
+  transform: none;
+}

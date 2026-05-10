@@ -1,0 +1,8 @@
+:root {
+    --brand-color: #62fc15;
+    --brand-font: system-ui, -apple-system, sans-serif;
+}
+
+* {
+    font-family: var(--brand-font);
+}
