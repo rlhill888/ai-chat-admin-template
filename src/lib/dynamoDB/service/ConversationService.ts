@@ -12,7 +12,7 @@ export async function getConversations(
   try {
     const result = await dynamoDB.send(
       new QueryCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         IndexName: process.env.CHAT_CONVERSATIONS_TABLE_GSI_NAME!,
         KeyConditionExpression: "#cm = :cm",
         ExpressionAttributeNames: {
@@ -38,7 +38,7 @@ export async function getConversations(
         conversationMethod,
         limit,
         cursor,
-        tableName: process.env.DYNAMODB_TABLE_NAME,
+        tableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME,
         indexName: process.env.CHAT_CONVERSATIONS_TABLE_GSI_NAME
       }
     });
@@ -51,7 +51,7 @@ export async function putConversation(
   conversation: Omit<Conversation, "timeStamp">
 ): Promise<PutCommandOutput> {
   const params = {
-    TableName: process.env.DYNAMODB_TABLE_NAME!,
+    TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
     Item: {
       conversationId: conversation.conversationId,
       timeStamp: new Date().toISOString(),
@@ -98,7 +98,7 @@ export async function setConversationAsRead(conversationId: string, timeStamp: s
   try {
     const result = await dynamoDB.send(
       new UpdateCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         Key: {
           conversationId,
           timeStamp
@@ -129,7 +129,7 @@ export async function setConversationAsCurrentlyBeingRespondedByAi(
   try {
     const result = await dynamoDB.send(
       new UpdateCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         Key: {
           conversationId,
           timeStamp,
@@ -164,7 +164,7 @@ export async function setConversationAiResponseToggle(
   try {
     const result = await dynamoDB.send(
       new UpdateCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         Key: {
           conversationId,
           timeStamp,
@@ -202,7 +202,7 @@ export async function updateConversationMostRecentMessage(
 
     const result = await dynamoDB.send(
       new UpdateCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         Key: {
           conversationId,
           timeStamp,
@@ -232,7 +232,7 @@ export async function updateConversationMostRecentMessage(
         timeStamp,
         mostRecentMessage,
         setNewMessage,
-        tableName: process.env.DYNAMODB_TABLE_NAME,
+        tableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME,
         operation: "UpdateCommand",
         function: "updateConversationMostRecentMessage",
       },
@@ -250,7 +250,7 @@ export async function getConversationById(
   try {
     const result = await dynamoDB.send(
       new QueryCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         KeyConditionExpression: "conversationId = :conversationId",
         ExpressionAttributeValues: {
           ":conversationId": conversationId,
@@ -264,7 +264,7 @@ export async function getConversationById(
     Sentry.captureException(error, {
       extra: {
         conversationId,
-        tableName: process.env.DYNAMODB_TABLE_NAME,
+        tableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME,
       },
     });
 
@@ -280,7 +280,7 @@ export async function updateUserInterventionRequired(
   try {
     const result = await dynamoDB.send(
       new UpdateCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         Key: {
           conversationId,
           timeStamp,
@@ -300,7 +300,7 @@ export async function updateUserInterventionRequired(
         conversationId,
         timeStamp,
         userInterventionRequired,
-        tableName: process.env.DYNAMODB_TABLE_NAME,
+        tableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME,
         operation: "UpdateCommand",
         function: "updateUserInterventionRequired",
       },

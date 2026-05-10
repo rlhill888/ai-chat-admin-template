@@ -16,7 +16,7 @@ dynamodb = boto3.resource(
     region_name=os.getenv("APP_AWS_REGION"),
 )
 
-table = dynamodb.Table(os.getenv("DYNAMODB_TABLE_NAME"))
+table = dynamodb.Table(os.getenv("CONVERSATIONS_DYNAMODB_TABLE_NAME"))
 
 
 # --- generate fake conversation ---

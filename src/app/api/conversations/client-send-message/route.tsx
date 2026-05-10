@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     const getConversation: QueryCommandOutput = await dynamoDB.send(
       new QueryCommand({
-        TableName: process.env.DYNAMODB_TABLE_NAME!,
+        TableName: process.env.CONVERSATIONS_DYNAMODB_TABLE_NAME!,
         KeyConditionExpression: "conversationId = :conversationId",
         ExpressionAttributeValues: {
           ":conversationId": conversationId,
