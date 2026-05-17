@@ -8,7 +8,7 @@ import { dynamoDB } from "@/lib/dynamoDB/dynamodb";
 import { SendMessageCommand } from "@aws-sdk/client-sqs";
 import { sqs } from "@/lib/sqs/sqs";
 import { randomUUID } from "crypto";
-import { ablyRest, COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL } from "@/lib/ably/ablyRest";
+import { getAblyRest, COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL } from "@/lib/ably/ablyRest";
 
 type CreateConversationMessageBody = Omit<
   ConversationAndMessages,
@@ -86,6 +86,7 @@ export async function POST(req: Request) {
 
       // send out notification
 
+      const ablyRest = await getAblyRest();
       const channel = ablyRest.channels.get(COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL);
 
       // see if a ai response for a message is turned on:

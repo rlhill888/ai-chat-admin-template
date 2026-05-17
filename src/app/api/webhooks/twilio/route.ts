@@ -11,7 +11,8 @@ import {
 import { SendMessageCommand } from "@aws-sdk/client-sqs";
 import { sqs } from "@/lib/sqs/sqs";
 import { randomUUID } from "crypto";
-import { ablyRest, COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL } from "@/lib/ably/ablyRest";
+import { getAblyRest, COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL } from "@/lib/ably/ablyRest";
+import { getSecret } from "@/lib/secrets/awsSecrets";
 
 function twimlResponse(status = 200) {
   return new Response("<Response/>", {
@@ -36,7 +37,8 @@ export async function POST(req: Request) {
     }
 
     // Validate that this request genuinely came from Twilio
-    const authToken = process.env.TWILIO_AUTH_TOKEN!;
+    const twilioSecret = await getSecret(process.env.TWILIO_SECRET_ARN!);
+    const authToken = twilioSecret.authToken;
     const twilioSignature = req.headers.get("X-Twilio-Signature") ?? "";
     const isValid = twilio.validateRequest(authToken, twilioSignature, req.url, params);
 
@@ -90,6 +92,7 @@ export async function POST(req: Request) {
       content: message.body,
     }));
 
+    const ablyRest = await getAblyRest();
     const channel = ablyRest.channels.get(COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL);
 
     if (conversation.aiAutoResponseToggle) {

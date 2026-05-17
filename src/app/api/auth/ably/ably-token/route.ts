@@ -1,6 +1,5 @@
-import { ably } from "@/lib/ably/ably";
+import { getAbly } from "@/lib/ably/ably";
 import { NextRequest, NextResponse } from "next/server";
-import * as Ably from "ably";
 import { authorizeUser } from "@/lib/dynamoDB/service/Authorization";
 
 export async function GET(req: NextRequest) {
@@ -10,6 +9,7 @@ export async function GET(req: NextRequest) {
       return authorization.response as NextResponse
     }
 
+    const ably = await getAbly();
     const tokenRequestData = await ably.auth.createTokenRequest({
       clientId: "COMPANY_NAME_PLACEHOLDER-dashboard",
     });

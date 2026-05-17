@@ -3,10 +3,9 @@ import * as Sentry from "@sentry/nextjs";
 import { createConversationMessage } from "@/lib/dynamoDB/service/ConversationMessageService";
 import { updateConversationMostRecentMessage, updateUserInterventionRequired } from "@/lib/dynamoDB/service/ConversationService";
 import ConversationAndMessages from "@/lib/dynamoDB/dynamoDbSchemaInterfaces/conversationAndMessages";
-import { ablyRest } from "@/lib/ably/ablyRest";
+import { getAblyRest } from "@/lib/ably/ablyRest";
 import { COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL } from "@/lib/ably/ablyConstants";
 import { authorizeUser } from "@/lib/dynamoDB/service/Authorization";
-import { twilioClient } from "@/lib/twilio/twilioClient";
 
 type CreateConversationMessageBody = Omit<
   ConversationAndMessages,
@@ -62,6 +61,7 @@ export async function POST(req: Request) {
       const updatedUserIntervention = await updateUserInterventionRequired(conversationId, conversationTimeStamp, false)
     }
 
+    const ablyRest = await getAblyRest();
     const channel = ablyRest.channels.get(COMPANY_NAME_PLACEHOLDER_CHAT_CHANNEL);
 
     const publishResponse = await channel.publish("conversation-update-new-message", {
