@@ -195,8 +195,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-top-color: #555555;
+  border: 3px solid color-mix(in srgb, var(--brand-color) 20%, transparent);
+  border-top-color: var(--brand-color);
   animation: spin 0.75s linear infinite;
 }
 
