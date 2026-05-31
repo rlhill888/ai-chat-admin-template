@@ -27,6 +27,7 @@ export default function MessageThread({
   const [messageText, setMessageText] = useState("");
   const [sendError, setSendError] = useState("");
   const [nextKey, setNextKey] = useState<Record<string, unknown> | undefined>();
+  const [isInitialLoading, setIsInitialLoading] = useState(false);
   const [isLoadingMoreMessages, setIsLoadingMoreMessages] = useState(false);
   const [hasMoreMessages, setHasMoreMessages] = useState(true);
   const [aiResponseToggle, setAiResponseToggle] = useState(
@@ -39,6 +40,7 @@ export default function MessageThread({
 
   useEffect(() => {
     async function getMessages() {
+      setIsInitialLoading(true);
       try {
         shouldScrollToBottomRef.current = true;
 
@@ -52,6 +54,8 @@ export default function MessageThread({
         setAiResponseToggle(conversation.aiAutoResponseToggle ?? false);
       } catch (error) {
         // future error handling
+      } finally {
+        setIsInitialLoading(false);
       }
     }
 
@@ -254,6 +258,26 @@ export default function MessageThread({
         className={styles.messagesContainer}
         onScroll={handleMessagesScroll}
       >
+        {isInitialLoading ? (
+          <div className={styles.initialLoadingContainer}>
+            <div className={styles.loadingSpinner}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        ) : null}
+
+        {isLoadingMoreMessages ? (
+          <div className={styles.paginationLoadingContainer}>
+            <div className={styles.loadingSpinner}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        ) : null}
+
         {messages.map((message) => (
           <div
             key={`${message.timeStamp} ${message.body}`}
