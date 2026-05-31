@@ -260,11 +260,7 @@ export default function MessageThread({
       >
         {isInitialLoading ? (
           <div className={styles.initialLoadingContainer}>
-            <div className={styles.loadingSpinner}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+            <div className={styles.spinner}></div>
           </div>
         ) : null}
 
