@@ -181,6 +181,7 @@
 @media (max-width: 1024px) {
   .hoverZone,
   .hoverZone:hover {
+    position: relative;
     height: auto;
   }
 
