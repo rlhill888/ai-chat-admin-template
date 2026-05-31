@@ -26,8 +26,7 @@ export default function RegisterUser({
   const [formState, setFormState] = useState<'Register User' | 'Copy Link'>("Register User")
   const [copied, setCopied] = useState(false);
   const [makingRequest, setMakingRequest] = useState(false)
-
-  const link = "temp link thingy"
+  const [registrationLink, setRegistrationLink] = useState("")
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -44,6 +43,8 @@ export default function RegisterUser({
           ...form,
           active: false
         })
+      const link = `${window.location.origin}/user-registration/${newUser.$metadata.requestId}`;
+      setRegistrationLink(link);
       setUsers((previous: User[])=>{
         let newArray = [...previous]
         newArray.push({
@@ -55,12 +56,12 @@ export default function RegisterUser({
         })
         return newArray
       })
-      setOpenModal(false)
       setForm({
         name: "",
         email: "",
         password: "",
       })
+      setFormState('Copy Link')
       setMakingRequest(false)
     } catch (error) {
       setMakingRequest(false)
@@ -69,7 +70,7 @@ export default function RegisterUser({
   }
 
   async function handleCopy() {
-    await navigator.clipboard.writeText(link);
+    await navigator.clipboard.writeText(registrationLink);
     setCopied(true);
 
     setTimeout(() => setCopied(false), 2000);
@@ -82,6 +83,8 @@ export default function RegisterUser({
       open={openModal}
       onClose={() => {
         setOpenModal(false)
+        setFormState('Register User')
+        setRegistrationLink('')
       }}
     >
       <div className={styles.card}>
@@ -94,7 +97,7 @@ export default function RegisterUser({
               </p>
 
               <div className={styles.copyBox}>
-                <span className={styles.link}>{link}</span>
+                <span className={styles.link}>{registrationLink}</span>
 
                 <button onClick={handleCopy} className={styles.copyButton}>
                   {copied ? "Copied" : "Copy"}
