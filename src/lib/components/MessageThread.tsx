@@ -18,8 +18,10 @@ import { useUser } from "./context/UserContext";
 
 export default function MessageThread({
   conversation,
+  onAiToggleChange,
 }: {
   conversation: Conversation;
+  onAiToggleChange?: (value: boolean) => void;
 }) {
   const { ably } = useAbly();
   const { user } = useUser()
@@ -216,12 +218,14 @@ export default function MessageThread({
   };
 
   async function handleResponseToggle(e: any) {
-    setAiResponseToggle(e.target.checked)
+    const newValue = e.target.checked;
+    setAiResponseToggle(newValue);
+    onAiToggleChange?.(newValue);
     try {
-      const aiToggle = await setConversationAiResponseToggle(conversation.conversationId, conversation.timeStamp, e.target.checked)
-      
+      await setConversationAiResponseToggle(conversation.conversationId, conversation.timeStamp, newValue);
     } catch (error) {
-
+      setAiResponseToggle(!newValue);
+      onAiToggleChange?.(!newValue);
     }
   }
 

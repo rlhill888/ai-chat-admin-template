@@ -363,7 +363,21 @@ export default function Home() {
         onTouchEnd={handleTouchEnd}
       >
         {currentConversation && (
-          <MessageThread conversation={currentConversation} />
+          <MessageThread
+            conversation={currentConversation}
+            onAiToggleChange={(value) => {
+              setCurrentConversation((prev) =>
+                prev ? { ...prev, aiAutoResponseToggle: value } : prev
+              );
+              setConversations((prev) =>
+                prev.map((c) =>
+                  c.conversationId === currentConversation.conversationId
+                    ? { ...c, aiAutoResponseToggle: value }
+                    : c
+                )
+              );
+            }}
+          />
         )}
       </div>
     </div>
