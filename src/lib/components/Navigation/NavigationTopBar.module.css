@@ -118,27 +118,100 @@
   outline-offset: 3px;
 }
 
-@media (max-width: 600px) {
-  .navbar {
-    height: 58px;
-    padding: 0 16px;
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: #111111;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.hamburger:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Mobile dropdown — hidden on desktop */
+.mobileMenu {
+  display: none;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 14px 20px;
+  color: #111111;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.15s ease;
+}
+
+.mobileNavLink:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.mobileLogoutButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  color: rgba(190, 40, 40, 0.85);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.mobileLogoutButton:hover {
+  background: rgba(190, 40, 40, 0.05);
+}
+
+/* Mobile & iPad — override the hover-reveal with a permanent bar + hamburger */
+@media (max-width: 1024px) {
+  .hoverZone,
+  .hoverZone:hover {
+    height: auto;
+  }
+
+  .navbar,
+  .hoverZone:hover .navbar {
+    position: relative;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    height: 60px;
+    padding: 0 20px;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
 
   .logo {
     font-size: 15px;
-  }
-
-  .navLinks {
-    gap: 4px;
-  }
-
-  .navLink {
-    padding: 8px 9px;
-    font-size: 13px;
-  }
-
-  .logoutButton {
-    padding: 8px 10px;
-    font-size: 13px;
   }
 }
